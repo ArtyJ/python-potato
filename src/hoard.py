@@ -4,24 +4,30 @@ class Treasure:
     name = ""
     xp = 0
     chance = 0
+    abbr = ""
     
-    def __init__(self, n, x, c):
+    def __init__(self, n, x, c, a):
         self.name = n
         self.xp = x
         self.chance = c
-    def prt(self):
-        print(f"name={self.name}, xp={self.xp}, chance={self.chance}%")
+        self.abbr = a
+    def __str__(self):
+        if self.xp < 1: return "-"
+        return f"{self.abbr}/{self.xp}/{self.chance}%"
+        # print(f"name={self.name}, xp={self.xp}, chance={self.chance}%")
         
         
 def initTreasures():
-    treasures = {Treasure("Purse", 10, 5),                   
-    Treasure("Ring", 25, 10),
-    Treasure("Chalice", 50, 20),
-    Treasure("Crown", 100, 25),
-    Treasure("Lamp", 250, 30),
-    Treasure("Treasure", 500, 50)
+    treasures = {Treasure("None", 0, 0, "-"),
+        Treasure("CoinPurse", 10, 5, "C"),                   
+    Treasure("GoldRing", 25, 10, "GR"),
+    Treasure("Priest'sChalice", 50, 20, "P"),
+    Treasure("King'sCrown", 100, 25, "K"),
+    Treasure("Genie'sLamp", 250, 30, "GL"),
+    Treasure("SacretTreasure", 500, 50, "S")
     }
-    return treasures
+    #newlist = sorted(ut, key=lambda x: x.count, reverse=True)
+    return sorted(treasures, key=lambda t: t.chance, reverse=True)
 
 
 # calculate how many xp needed to level 100
@@ -33,10 +39,27 @@ def getXpTo(level, exp):
         return 0
     return (level + 101) * (100 - level) / 2 - exp
 
+def goldCost(level, treasureAmount):
+    return (level * 200 + 600) * treasureAmount
 
 def findChance100():
     # dad implemented
     n = 0
+    list1 = initTreasures()
+    for t1 in list1:
+        for t2 in list1:
+            if t2.chance > t1.chance: continue
+            for t3 in list1:
+                if t3.chance > t2.chance: continue
+                for t4 in list1:
+                    if t4.chance > t3.chance: continue
+                    for t5 in list1:
+                        if t5.chance > t4.chance: continue
+                        comb = [t1,t2,t3,t4,t5]
+                        if sum(t.chance for t in comb) == 100:
+                            n += 1
+                            print(f"No. {'%02d'%(n)}: {t1}, {t2}, {t3}, {t4}, {t5} => chance=100%, exp = {sum(t.xp for t in comb)}")
+
     print(f"Found {n} combinations at 100% chance of quality upgrade.")
 
 
@@ -56,8 +79,9 @@ def planUpgrade(name, level, exp, quality):
 if __name__ == '__main__': 
     start = time.time()
     treasures = initTreasures()
-    for t in treasures:
-        t.prt()
+    print(treasures)
+    # for t in treasures:
+    #     t.prt()
  
     findChance100()
     
