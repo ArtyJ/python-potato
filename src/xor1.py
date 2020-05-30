@@ -12,11 +12,11 @@ no1 = randint(15,125)
 no2 = randint(15,125)
 
 while no2 == no1:
-	no2 = randint(15,125)
+    no2 = randint(15,125)
 
 no3 = randint(15,125)
 while no3 == no1 or no3 == no2 :
-	no3 = randint(15,125)
+    no3 = randint(15,125)
 
 print('first no. %d     second no. %d     third no. %d' % (no1,no2,no3))
 
@@ -27,36 +27,34 @@ nno1 = no1
 nno2 = no2
 nno3 = no3
 for i in range (5,-1,-1):
-	k = 2**i
+    k = 2**i
     if noo1//k + noo2//k +noo3//k == 2:
-		noo1 = nno1 % 2**i
-		noo2 = nno2 % 2**i
-		noo3 = nno3 % 2**i
-		continue
-	elif noo1//2**i + noo2//2**i +noo3//2**i == 1:
-		if noo1//2**i == 1:
-			print('i have changed the first no to %d' % (no2^^no3))
-			print('first no. %d     second no. %d     third no. %d' % (no2^^no3,no2,no3))
-		elif noo2//2**i == 1:
-			print('i have changed the second no to %d' % (no1^^no3))
-			print('first no. %d     second no. %d     third no. %d' % (no1,no1^^no3,no3))
-		else:
-			print('i have changed the third no to %d' % (no1^^no2))
-			print('first no. %d     second no. %d     third no. %d' % (no1,no2,no1^^no2))
-	else:
-		no = randint(1,3)
-		if no == 1: 
-			no1 = no2^^no3
-			print('i have changed the first no to %d' % (no1))			
-		elif no == 2:
-			no2 = no1^^no3
-			print('i have changed the second no to %d' % (no2))
-		else:
-			no3 = no1^^no2
-			print('i have changed the third no to %d' % (no3))
-			
+        noo1 = nno1 % 2**i
+        noo2 = nno2 % 2**i
+        noo3 = nno3 % 2**i
+        continue
+    elif noo1//2**i + noo2//2**i +noo3//2**i == 1:
+        if noo1//2**i == 1:
+            print('i have changed the first no to %d' % (no2^no3))
+            print('first no. %d     second no. %d     third no. %d' % (no2^no3,no2,no3))
+        elif noo2//2**i == 1:
+            print('i have changed the second no to %d' % (no1^no3))
+            print('first no. %d     second no. %d     third no. %d' % (no1,no1^no3,no3))
+        else:
+            print('i have changed the third no to %d' % (no1^no2))
+            print('first no. %d     second no. %d     third no. %d' % (no1,no2,no1^no2))
+    else:
+        no = randint(1,3)
+        if no == 1: 
+            no1 = no2^no3
+            print('i have changed the first no to %d' % (no1))            
+        elif no == 2:
+            no2 = no1^no3
+            print('i have changed the second no to %d' % (no2))
+        else:
+            no3 = no1^no2
+            print('i have changed the third no to %d' % (no3))
+            
 print('first no. %d     second no. %d     third no. %d' % (no1,no2,no3))
 
 print('now it is your turn to changd the number.' )
-		
-
